@@ -14,6 +14,8 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.Visibility
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
+import androidx.test.espresso.matcher.ViewMatchers.withId
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.UiScrollable
@@ -22,6 +24,7 @@ import org.hamcrest.CoreMatchers
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.containsString
 import org.mozilla.fenix.R
+import org.mozilla.fenix.helpers.click
 
 /**
  * Implementation of Robot Pattern for the home screen menu.
@@ -75,6 +78,8 @@ class HomeScreenRobot {
 
     fun verifyExistingTabList() = assertExistingTabList()
 
+    fun verifyTabTitle(expectedTitle: String) = assertTabTitle(expectedTitle)
+
     private fun scrollToElementByText(text: String): UiScrollable {
         val appView = UiScrollable(UiSelector().scrollable(true))
         appView.scrollTextIntoView(text)
@@ -83,6 +88,10 @@ class HomeScreenRobot {
 
     fun swipeUpToDismissFirstRun() {
         scrollToElementByText("Start browsing")
+    }
+
+    fun closeTab() {
+        closeTabButton().click()
     }
 
     class Transition {
@@ -136,6 +145,8 @@ val mDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
 private fun navigationToolbar() =
     onView(CoreMatchers.allOf(ViewMatchers.withText("Search or enter address")))
+
+private fun closeTabButton() = onView(withId(R.id.close_tab_button))
 
 private fun assertNavigationToolbar() =
     onView(CoreMatchers.allOf(ViewMatchers.withText("Search or enter address")))
@@ -321,3 +332,7 @@ private fun assertExistingTabList() =
         .check(matches(withEffectiveVisibility(Visibility.VISIBLE)))
 
 private fun tabsListThreeDotButton() = onView(allOf(ViewMatchers.withId(R.id.tabs_overflow_button)))
+
+private fun assertTabTitle(expectedTitle: String) =
+    onView(withId(R.id.tab_title))
+        .check(matches(withText(expectedTitle)))
