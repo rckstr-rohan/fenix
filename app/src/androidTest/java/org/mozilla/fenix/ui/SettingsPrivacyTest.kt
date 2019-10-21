@@ -90,11 +90,55 @@ class SettingsPrivacyTest {
 
             // PRIVACY
             verifyPrivacyHeading()
-            verifyEnhancedTrackingProtectionButton()
+//            verifyEnhancedTrackingProtectionButton()
             verifyEnhancedTrackingProtectionValue()
-            // drill down to submenu
+            }.openSubMenuEnhancedTP {
+                verifyBrowseHeader()
+                verifyBrowseText()
+                verifyLearnMoreLink()
+//                verifyEnhancedTrackingProtectionToggle()
+                verifyStandardToggle()
+                verifyStandardDescription()
+                verifyStrictToggle()
+                verifyStrictDescription()
+                verifyExceptions()
+                }.openExceptions {
+                    verifyExceptionsDescription()
+                    verifyLearnMoreLink()
+                }.goBack {
+            }.goBack {
             verifyAddPrivateBrowsingShortcutButton()
-            verifySitePermissionsButton()
+            // drill down to submenu
+            }.openSubMenuSitePermissions {
+                verifyAutoplay()
+                verifyAutoplayStatus()
+                verifyCamera()
+//                verifyCameraStatus()
+                verifyLocation()
+//                verifyLocationStatus()
+                verifyMicrophone()
+//                verifyMicrophoneStatus()
+                verifyNotification()
+//                verifyNotificationStatus()
+                verifyExceptions()
+                }.openExceptions {
+                    verifyNoSiteExceptions()
+                }.goBack {
+            }.goBack {
+            }.openSubMenuDeleteBrowsingData {
+                verifyOpenTabs()
+                verifyOpenTabsCount()
+                verifyBrowsingHistory()
+                verifyBrowsingHistoryCount()
+                verifyCollections()
+                verifyCollectionsCount()
+                verifyCookies()
+                verifyCookiesDescription()
+                verifyCached()
+                verifyCachedDescription()
+                verifySitePermissions()
+                verifyDeleteBrowsingDataButton()
+            }.goBack {
             // drill down on search
             verifyDeleteBrowsingDataButton()
             verifyDeleteBrowsingDataOnQuitButton()

@@ -104,6 +104,33 @@ class SettingsRobot {
             SettingsSubMenuDefaultBrowserRobot().interact()
             return SettingsSubMenuDefaultBrowserRobot.Transition()
         }
+
+        fun openSubMenuEnhancedTP(interact: SettingsSubMenuEnhancedTPRobot.() -> Unit): SettingsSubMenuEnhancedTPRobot.Transition {
+            mDevice.waitForIdle()
+            fun enhancedTPButton() = onView(ViewMatchers.withText("Enhanced Tracking Protection"))
+            enhancedTPButton().click()
+
+            SettingsSubMenuEnhancedTPRobot().interact()
+            return SettingsSubMenuEnhancedTPRobot.Transition()
+        }
+
+        fun openSubMenuSitePermissions(interact: SettingsSubMenuSitePermissionsRobot.() -> Unit): SettingsSubMenuSitePermissionsRobot.Transition {
+            mDevice.waitForIdle()
+            fun defaultBrowserButton() = onView(ViewMatchers.withText("Set as default browser"))
+            defaultBrowserButton().click()
+
+            SettingsSubMenuSitePermissionsRobot().interact()
+            return SettingsSubMenuSitePermissionsRobot.Transition()
+        }
+
+        fun openSubMenuDeleteBrowsingData(interact: SettingsSubMenuDeleteBrowsingDataRobot.() -> Unit): SettingsSubMenuDeleteBrowsingDataRobot.Transition {
+            mDevice.waitForIdle()
+            fun defaultBrowserButton() = onView(ViewMatchers.withText("Set as default browser"))
+            defaultBrowserButton().click()
+
+            SettingsSubMenuDeleteBrowsingDataRobot().interact()
+            return SettingsSubMenuDeleteBrowsingDataRobot.Transition()
+        }
     }
 }
 
